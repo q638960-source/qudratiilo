@@ -1,0 +1,25 @@
+name: APK yig’ish
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ‘17’
+      - name: Zipni ochish
+        run: unzip -q qudratillo.zip -d work
+      - name: APK yig’ish
+        working-directory: work/QUDRATILLO
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug —no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QUDRATILLO-apk
+          path: work/QUDRATILLO/app/build/outputs/apk/debug/app-debug.apk
