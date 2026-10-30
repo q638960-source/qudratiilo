@@ -18,7 +18,7 @@ jobs:
         working-directory: work/QUDRATILLO
         run: |
           chmod +x gradlew
-          ./gradlew assembleDebug —no-daemon
+          ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: QUDRATILLO-apk
